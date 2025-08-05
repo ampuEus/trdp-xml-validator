@@ -1,0 +1,39 @@
+{
+  "name": "trdp-xml-validator",
+  "version": "1.0.0",
+  "description": "TRDP config XML validator.",
+  "type": "module",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build src/index.html --public-url /trdp-xml-validator",
+    "lint": "eslint src/*.js",
+    "format": "prettier --write src/*.js src/*.html src/*.css"
+  },
+  "keywords": ["trdp", "xml", "validator", "tcn", "iec61375-2-3", "railway"],
+  "author": "ampu",
+  "homepage": "https://github.com/ampuEus/trdp-xml-validator#readme",
+  "repository": "github:trdp-xml-validator/example",
+  "bugs": "https://github.com/ampuEus/trdp-xml-validator/issues",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": false,
+  "dependencies": {
+    "@codemirror/lang-xml": "6.1.0",
+    "@codemirror/state": "6.5.2",
+    "@codemirror/theme-one-dark": "6.1.3",
+    "@codemirror/view": "6.38.0",
+    "codemirror": "6.0.2",
+    "xmllint-wasm": "5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/css": "0.10.0",
+    "@eslint/js": "9.30.1",
+    "@parcel/packager-xml": "2.15.4",
+    "@parcel/transformer-xml": "2.15.4",
+    "eslint": "9.30.1",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-prettier": "5.5.1",
+    "globals": "16.3.0",
+    "parcel": "2.15.4",
+    "prettier": "3.6.2"
+  }
+}

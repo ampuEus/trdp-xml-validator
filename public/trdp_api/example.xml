@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="trdp-config.xsd" host-name="ED1_1" leader-name="ED1_1_leader" type="dummy">
+  <!-- Device Config -->
+  <device-configuration memory-size="262144"/>
+
+  <!-- Debug Config -->
+  <debug file-name="trdp.log" file-size="1000000" info="ADFC" level="I"/>
+
+  <!-- Interface Config -->
+  <bus-interface-list>
+    <!-- Subnet1(eth0) Interface Config -->
+    <bus-interface network-id="1" name="eth0">
+      <!-- Process Config -->
+      <trdp-process blocking="no" cycle-time="10000" priority="64" traffic-shaping="on"/>
+      <!-- Global PD Config -->
+      <pd-com-parameter marshall="on" port="17224" qos="5" ttl="64" timeout-value="100000" validity-behavior="zero" callback="on"/>
+      <!-- Global MD Config -->
+      <md-com-parameter udp-port="17225" tcp-port="17225" confirm-timeout="1000000" connect-timeout="60000000" reply-timeout="5000000" marshall="on" protocol="UDP" qos="3" retries="2" ttl="64" callback="on" num-sessions="1000"/>
+      <!-- Publish Telegram -->
+      <telegram name="reception_tlg_21000" com-id="21000" data-set-id="2100" com-parameter-id="1" type="source">
+        <!-- Telegram scope PD Config -->
+        <pd-parameter cycle="10000" marshall="on" timeout="30000" validity-behavior="keep" callback="always" redundant="1"/>
+        <source id="1" uri1="192.168.1.2" uri2="192.168.2.2"/>
+      </telegram>
+      <telegram name="transmission_tlg_11010" com-id="11010" data-set-id="1101" com-parameter-id="1" type="sink">
+        <pd-parameter cycle="10000" marshall="on" timeout="300000" validity-behavior="keep" redundant="1"/>
+        <destination id="1" uri="192.168.1.2"/>
+        <destination id="2" uri="192.168.1.3"/>
+        <destination id="3" uri="192.168.2.2"/>
+        <destination id="4" uri="192.168.3.2"/>
+      </telegram>
+    </bus-interface>
+  </bus-interface-list>
+
+  <mapped-device-list>
+  </mapped-device-list>
+
+  <com-parameter-list>
+    <!--Default PD communication parameters-->
+    <com-parameter id="1" qos="5" ttl="64" retries="0"/>
+    <!--Default MD communication parameters-->
+    <com-parameter id="2" qos="3" ttl="64" retries="3"/>
+    <!--Own PD communication parameters-->
+    <com-parameter id="3" qos="4" ttl="2"/>
+  </com-parameter-list>
+
+  <!--
+    BOOL8         1     =UINT8, 1 bit relevant (equal to zero -> false, not equal to zero -> true)
+    CHAR8         2     char, can be used also as UTF8
+    UTF16         3     Unicode UTF-16 character
+    INT8          4     Signed integer, 8 bit
+    INT16         5     Signed integer, 16 bit
+    INT32         6     Signed integer, 32 bit
+    INT64         7     Signed integer, 64 bit
+    UINT8         8     Unsigned integer, 8 bit
+    UINT16        9     Unsigned integer, 16 bit
+    UINT32        10    Unsigned integer, 32 bit
+    UINT64        11    Unsigned integer, 64 bit
+    REAL32        12    Floating point real, 32 bit
+    REAL64        13    Floating point real, 64 bit
+    TIMEDATE32    14    32 bit UNIX time
+    TIMEDATE48    15    48 bit TCN time (32 bit seconds and 16 bit ticks)
+    TIMEDATE64    16    32 bit seconds and 32 bit microseconds
+  -->
+  <data-set-list>
+    <data-set name="transmission_example" id="1101">
+      <element name="start" type="UINT8" offset="0"/>
+      <element name="stop" type="UINT8" offset="1"/>
+      <element name="reserve02" type="UINT8" offset="2"/>
+      <element name="reserve03" type="UINT8" offset="3"/>
+      <element name="reserve04" type="UINT8" offset="4"/>
+      <element name="reserve05" type="UINT8" offset="5"/>
+      <element name="reserve06" type="UINT8" offset="6"/>
+      <element name="reserve07" type="UINT8" offset="7"/>
+      <element name="power" type="UINT16" unit="W" scale="0.01"/>
+      <element name="maxPower" type="UINT16" unit="W" scale="0.01"/>
+      <element name="minPower" type="UINT16" unit="W" scale="0.01"/>
+      <element name="system_mode" type="UINT8"/>
+    </data-set>
+    <data-set name="reception_example" id="2100">
+      <element name="equipmentId" type="UINT8" unit="None" scale="1"/>
+      <element name="swVersion" type="UINT8" unit="None" scale="1"/>
+      <element name="available_power" type="UINT16" unit="W" scale="0.01"/>
+      <element name="Vbus" type="UINT8" unit="kV" scale="1000"/>
+      <element name="IGBT_Temp" type="INT16" unit="ºC" scale="0.1"/>
+      <element name="Water_Temp" type="INT16" unit="ºC" scale="0.1"/>
+      <element name = "errors_array" type = "INT8" array-size = "10"/>
+    </data-set>
+  </data-set-list>
+</device>

@@ -1,0 +1,22 @@
+export default [
+  {
+    printWidth: 80,
+    tabWidth: 2,
+    useTabs: false,
+    semi: false,
+    singleQuote: false,
+    quoteProps: "double",
+    jsxSingleQuote: false,
+    trailingComma: "all",
+    bracketSpacing: true,
+    bracketSameLine: true,
+    arrowParens: "always",
+    requirePragma: false,
+    insertPragma: false,
+    proseWrap: "preserve",
+    htmlWhitespaceSensitivity: "css",
+    endOfLine: "lf",
+    embeddedLanguageFormatting: "auto",
+    singleAttributePerLine: false,
+  },
+];
